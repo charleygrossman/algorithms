@@ -6,8 +6,7 @@ def main():
         if i[0] == "q": break
 
         arr = [int(x) for x in i]
-        #-1
-        quick_sort(arr, 0, len(arr))
+        quick_sort(arr, 0, len(arr)-1)
         print(arr)
 
 def quick_sort(arr, lo, hi):
@@ -19,21 +18,21 @@ def quick_sort(arr, lo, hi):
 
 # i := separates <p and >p
 # j := separates seen from unseen
-# Pivot is arr[hi]
+# pivot is arr[hi]
 def partition(arr, lo, hi):
+    pivot = arr[hi]
     i = lo-1
-    for j in range(lo, hi-1):
-        if arr[j] <= arr[hi]:
+
+    for j in range(lo, hi):
+        if arr[j] <= pivot:
             i += 1
             tmp = arr[i]
             arr[i] = arr[j]
             arr[j] = tmp
-    i += 1
-    tmp = arr[i]
-    arr[i] = arr[hi]
+    tmp = arr[i+1]
+    arr[i+1] = arr[hi]
     arr[hi] = tmp
-
-    return i
+    return i + 1
 
 if __name__ == "__main__":
     main()
