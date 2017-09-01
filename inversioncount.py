@@ -26,6 +26,9 @@ def merge(arr, a, b):
     i = j = 0
 
     while i + j < len(arr):
+        global count
+        if i < len(a) and j < len(b) and a[i] > b[j]:
+            count += 1
         if j == len(b) or (i < len(a) and a[i] < b[j]):
             arr[i+j] = a[i]
             i += 1

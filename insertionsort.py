@@ -1,5 +1,3 @@
-#NOTE: Not working for all input
-
 def main():
     print("Enter [q] to quit")
 
@@ -13,12 +11,12 @@ def main():
 
 # Every move forward, we look to see how far back we can push that element
 def insertion_sort(arr):
-    for i in range(len(arr)):
-        for j in reversed(range(1, i)):
-            if arr[j] < arr[j-1]:
-                tmp = arr[j]
-                arr[j] = arr[j-1]
-                arr[j-1] = tmp
+    for i in range(1, len(arr)):
+        for j in reversed(range(i)):
+            if arr[j+1] < arr[j]:
+                tmp = arr[j+1]
+                arr[j+1] = arr[j]
+                arr[j] = tmp
 
 if __name__ == "__main__":
     main()
