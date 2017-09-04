@@ -1,10 +1,10 @@
 # NOTE: This is not always returning a boolean value
 
 def main():
-    print("Press [q] to quit")
+    print("Enter [q] to quit")
 
     while True:
-        i = input("Please enter a list of numbers, separated by spaces, " +
+        i = input("Enter a list of numbers, separated by spaces, " +
                   "and end with the number you are searching for: ").split()
         if i[0] == "q": break
 

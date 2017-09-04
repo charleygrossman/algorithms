@@ -1,10 +1,11 @@
-# WIP
+# NOTE: WIP
 
 def main():
-    print("Press [q] to quit")
+    print("Enter [q] to quit")
 
     while True:
-        i = input("Please enter a list of numbers, separated by spaces: ").split()
+        i = input("Enter a list of numbers, separated by spaces: ")
+            .split()
         if i[0] == "q": break
 
         arr = [int(x) for x in i]

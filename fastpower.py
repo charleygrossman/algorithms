@@ -1,5 +1,5 @@
 def main():
-    print("Press [q] to quit")
+    print("Enter [q] to quit")
 
     while True:
         i = input("Enter a base and its exponent: ").split()
