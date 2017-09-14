@@ -1,6 +1,3 @@
-
-# WIP: Provide a full and interactive interface to play with a visual linked-list
-
 def main():
     print("Enter [q] to quit")
     print("Welcome to the linked-list interface! Here are the methods: " +
@@ -15,22 +12,33 @@ def main():
         if i == "insert":
             e = input("Name the element you want to insert: ")
             linkedList.insert(e)
+
         if i == "delete":
             e = input("Name the element you want to delete: ")
-            linkedList.delete(e)
+            try:
+                linkedList.delete(e)
+                print(e + " deleted")
+            except ValueError:
+                print("Element not found in list")
+
         if i == "search":
             e = input("Name the element you're searching for: ")
-            o = linkedList.search(e)
-            print(o)
+            try:
+                o = linkedList.search(e)
+                print(o)
+            except ValueError:
+                print("Element not found in list")
+
         if i == "size":
             s = linkedList.size()
             print(s)
+
         if i == "display":
             linkedList.display()
 
 class Node(object):
 
-    def __init__(self, data = None, next_node = None):
+    def __init__(self, data=None, next_node=None):
         self.data = data
         self.next = next_node
 
@@ -44,7 +52,6 @@ class Node(object):
         self.next_node = new_next
 
 # LinkedList interfaces Node, user interfaces LinkedList
-# Handle raised value errors?
 class LinkedList(object):
 
     def __init__(self, head=None):
@@ -73,8 +80,7 @@ class LinkedList(object):
             else:
                 current = current.get_next()
         if current is None:
-                print("Element not in list")
-                # raise ValueError("Data not in list")
+            raise ValueError("Data not in list")
         return found
 
     def delete(self, data):
@@ -88,8 +94,7 @@ class LinkedList(object):
                 previous = current
                 current = current.get_next()
         if current is None:
-            print("Element not in list")
-            # raise ValueError("Data not in list")
+            raise ValueError("Data not in list")
         if previous is None:
             self.head = current.get_next()
         else:
