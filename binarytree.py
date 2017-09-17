@@ -13,8 +13,8 @@ def main():
             e = input("Name the element you want to insert: ")
             binaryTree.insert(e)
 
-        if i == size():
-            binaryTree.size()
+        if i == "size":
+            binaryTree.get_size()
 
 class Node(object):
 
@@ -43,33 +43,28 @@ class BinaryTree(object):
         self.parent = None
         self.left = None
         self.right = None
+        self.size = 0
 
-    def insert(self, child, parent=self.root):
+    def insert(self, child, parent=None, parent_lr=None):
+        child = int(child)
+        if parent is None:
+            parent = self.root
+
+        # Don't insert new and increase size if identical
         if parent.get_value() is None:
             new_node = Node(child)
             parent = new_node
+            self.size += 1
         else:
-            if e < parent.get_value():
-                insert(self, child, parent.get_left())
-            if e > parent.get_value():
-                insert(self, child, parent.get_right())
+            if child < parent.get_value():
+                print("child < parent")
+                self.insert(self, child, parent.get_left())
+            if child > parent.get_value():
+                print("child > parent")
+                self.insert(self, child, parent.get_right())
 
-    # REFACTOR: Use BFS or DFS
-    def size(self):
-        count = 0
-        current = self.root
-        # Count the left
-        while current.get_value() is not None:
-            count += 1
-            current = current.get_left()
-        # Count the right
-        current = self.root
-        count -= 1
-        while current.get_value() is not None:
-            count += 1
-            current = current.get_right()
-
-        print(count)
+    def get_size(self):
+        print(self.size)
 
 if __name__ == "__main__":
     main()
