@@ -3,7 +3,7 @@ def main():
     print("Welcome to the binary tree interface! Here are the methods: " +
           "insert, size, min")
 
-    init = int(input("Please initialize your tree with a value here: "))
+    init = int(input("Initialize your tree with a value here: "))
     binaryTree = BinaryTree(init)
 
     while True:
@@ -64,8 +64,10 @@ class BinaryTree(object):
 
         if parent.value() > e:
             parent.set_left(Node(e))
+            self.size += 1
         if parent.value() < e:
             parent.set_right(Node(e))
+            self.size += 1
 
     def get_size(self):
         print(self.size)
