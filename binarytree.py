@@ -18,33 +18,26 @@ def main():
             binaryTree.get_size()
 
         if i == "min":
-            binaryTree.get_min()
+            binaryTree.min()
 
 # A node with an initialized value, getters and setters for parent, left, and right
 class Node(object):
 
     def __init__(self, value):
         self.value = value
-        self.parent = None
         self.left = None
         self.right = None
 
-    def get_value(self):
+    def value(self):
         return self.value
 
-    def get_parent(self):
-        return self.parent
-
-    def set_parent(self, new_parent):
-        self.parent = new_parent
-
-    def get_left(self):
+    def left(self):
         return self.left
 
     def set_left(self, new_left):
         self.left = new_left
 
-    def get_right(self):
+    def right(self):
         return self.right
 
     def set_right(self, new_right):
@@ -59,37 +52,30 @@ class BinaryTree(object):
         self.root.set_right(Node(None))
         self.size = 1
 
-    # Default parameters are for internal recursive call (Refactor w/ helper?)
-    def insert(self, child, parent_t=None, parent=None):
-        if parent is None:
-            # We start at the root
-            parent = self.root
+    def insert(self, e):
+        parent = self.root
+        flag = True
+        while flag:
+            l = parent.left()
+            r = parent.right()
+            if l.value() is not None and l.value > e: parent = l
+            elif l.value() is not None and l.value() < e: parent = r
+            else: flag = False
 
-        # Occurs when a null leaf is hit
-        if parent.get_value() is None:
-            new_node = Node(child)
-            tmp = parent.get_parent()
-            parent = new_node
-            parent.set_parent(tmp)
-            self.size += 1
-        else:
-            if child < parent.get_value():
-                print("child < parent")
-                self.insert(self, child, parent.get_left())
-            if child > parent.get_value():
-                print("child > parent")
-                self.insert(self, child, parent.get_right())
+        if parent.value() > e:
+            parent.set_left(Node(e))
+        if parent.value() < e:
+            parent.set_right(Node(e))
 
     def get_size(self):
         print(self.size)
 
-    def get_min(self):
-        current = self.root.get_left()
-        min = current.get_value()
-
-        while current.get_value():
-            min = current.get_value()
-            current = current.get_left()
+    def min(self):
+        current = self.root
+        min = None
+        while current.value() is not None:
+            min = current.value()
+            current = current.left()
 
         print(min)
 
