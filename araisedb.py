@@ -1,5 +1,6 @@
 # Given a positive integer n, find if integers a,b such that a^b = n exist.
 # Assume that n > b > 1
+# NOTE: WIP: How to deal with combining like terms to match degree
 
 def main():
     print("Enter [q] to quit")
@@ -14,7 +15,9 @@ def main():
         else: print("No")
 
 def a_raised_b(n):
+    if n == 1: return True
     pFacts = p_factors(n)
+    print(pFacts)
     if n == 1 or n in pFacts: return False
     pfDistinct = list(set(pFacts))
     if len(pfDistinct) == 1: return True

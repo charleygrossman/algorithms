@@ -15,8 +15,5 @@ def main():
             tmp = [int(x) for x in tmp]
             G[tmp[0]] = tmp[1:]
 
-        
-
-
 if __name__ == "__main__":
     main()
