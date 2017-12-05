@@ -38,18 +38,18 @@ def main():
 
 class Node(object):
 
-    def __init__(self, data=None, next_node=None):
+    def __init__(self, data=None, nextNode=None):
         self.data = data
-        self.next = next_node
+        self.nextNode = nextNode
 
     def get_data(self):
         return self.data
 
     def get_next(self):
-        return self.next_node
+        return self.nextNode
 
-    def set_next(self, new_next):
-        self.next_node = new_next
+    def set_next(self, newNext):
+        self.nextNode = newNext
 
 # LinkedList interfaces Node, user interfaces LinkedList
 class LinkedList(object):
@@ -59,52 +59,52 @@ class LinkedList(object):
 
     # Insert into front of list
     def insert(self, data):
-        new_node = Node(data)
-        new_node.set_next(self.head)
-        self.head = new_node
+        newNode = Node(data)
+        newNode.set_next(self.head)
+        self.head = newNode
 
     def size(self):
-        current = self.head
+        curr = self.head
         count = 0
-        while current:
+        while curr:
             count += 1
-            current = current.get_next()
+            curr = curr.get_next()
         return count
 
     def search(self, data):
-        current = self.head
+        curr = self.head
         found = False
-        while current and found is False:
-            if current.get_data() == data:
+        while curr and found is False:
+            if curr.get_data() == data:
                 found = True
             else:
-                current = current.get_next()
-        if current is None:
+                curr = curr.get_next()
+        if curr is None:
             raise ValueError("Data not in list")
         return found
 
     def delete(self, data):
-        current = self.head
+        curr = self.head
         previous = None
         found = False
-        while current and found is False:
-            if current.get_data() == data:
+        while curr and found is False:
+            if curr.get_data() == data:
                 found = True
             else:
-                previous = current
-                current = current.get_next()
-        if current is None:
+                previous = curr
+                curr = curr.get_next()
+        if curr is None:
             raise ValueError("Data not in list")
         if previous is None:
-            self.head = current.get_next()
+            self.head = curr.get_next()
         else:
-            previous.set_next(current.get_next())
+            previous.set_next(curr.get_next())
 
     def display(self):
-        current = self.head
-        while current:
-            print(current.get_data())
-            current = current.get_next()
+        curr = self.head
+        while curr:
+            print(curr.get_data())
+            curr = curr.get_next()
 
 if __name__ == "__main__":
     main()
