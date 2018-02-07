@@ -2,8 +2,7 @@ def main():
     print("Enter [q] to quit")
 
     while True:
-        i = input("Enter a list of numbers, separated by spaces: ")
-            .split()
+        i = input("Enter a list of numbers, separated by spaces: ").split(" ")
         if i[0] == "q": break
 
         arr = [int(x) for x in i]
@@ -13,10 +12,8 @@ def main():
 def merge_sort(arr):
     n = len(arr)
     if n < 2: return
-
     a = arr[:n//2]
     b = arr[n//2:]
-
     merge_sort(a)
     merge_sort(b)
     merge(arr, a, b)
