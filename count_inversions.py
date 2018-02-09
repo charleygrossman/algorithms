@@ -16,6 +16,7 @@ def count_inversions(A):
     z = count_splits(A, x[0], y[0])
     return x[1] + y[1] + z
 
+# TODO: Fix sorting and count problem
 def sort_count(A, cnt):
     n = len(A)
     if n < 2: return (A, cnt)
@@ -24,6 +25,7 @@ def sort_count(A, cnt):
     sort_count(a, cnt)
     sort_count(b, cnt)
     cnt += merge(A, a, b)
+    # TODO: Probably shouldn't return here
     return (A, cnt)
 
 def count_splits(A, a,b):

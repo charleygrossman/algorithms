@@ -1,6 +1,6 @@
 def main():
     print("Enter [q] to quit")
-    print("This uses an adjaceny-list representation of a graph")
+    print("This uses an adjacency-list representation of a graph")
 
     while True:
         sets = input("Build your graph by entering a list of vertices separated" +
