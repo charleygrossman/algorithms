@@ -8,6 +8,7 @@ class Graph(dict):
         for e in edges:
             self.add_edge(e, graph_type)
 
+    # TODO: Using a Vertex object as a dictionary key is not the way to go
     def add_vertex(self, val, color="white", time_disc=0, time_exhaust=0, dist=0):
         v = Vertex(val, color, time_disc, time_exhaust, dist)
         self[v] = {}
@@ -46,6 +47,9 @@ class Vertex(object):
 
     def __eq__(self, other):
         return self.val == other.val
+
+    def __hash__(self):
+        return(hash(str(self.val)))
 
     def __str__(self):
         return "Vertex " + str(self.val) + "\n"
