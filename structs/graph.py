@@ -1,16 +1,17 @@
-# Graph interfaces Vertex, not the user
 class Graph(dict):
 
     # vertices is a list, edges a list of tuples
     def __init__(self, vertices, edges, graph_type="directed"):
+        self.vertices = vertices
+        self.edges = edges
+        self.graph_type = graph_type
+        
         for v in vertices:
             self.add_vertex(v)
         for e in edges:
             self.add_edge(e, graph_type)
 
-    # TODO: Using a Vertex object as a dictionary key is not the way to go
-    def add_vertex(self, val, color="white", time_disc=0, time_exhaust=0, dist=0):
-        v = Vertex(val, color, time_disc, time_exhaust, dist)
+    def add_vertex(self, v):
         self[v] = {}
 
     def add_edge(self, e, graph_type):
@@ -23,18 +24,25 @@ class Graph(dict):
         else:
             raise ValueError("Create a graph with type parameter 'directed' or 'undirected'")
 
-    # TODO: def __str__(self):
+    # Assumes legal vertices was entered
+    def has_edge(self, e):
+        v, w = e
+        if self[v][w] == e: return True
+        else: return False
+
+    def reverse(self):
+        edges_rev = [x[::-1] for x in self.edges]
+        return Graph(self.vertices, edges_rev, self.graph_type)
+
+    def __str__(self):
+        retval = ""
+        for k, v in self.items():
+            retval += str(k) + " -> " + str(v) + "\n"
+        return retval
 
     def __repr__(self):
         return "<graph representation>"
 
-    # TODO: Assumes legal vertices was entered
-    def has_edge(self, e):
-        v,w = e
-        if self[v][w] == e: return True
-        else: return False
-
-    # Reverse(): create a copy, reverse it, and return it
 
 class Vertex(object):
 

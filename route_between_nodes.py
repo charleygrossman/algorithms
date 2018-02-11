@@ -11,6 +11,7 @@ def main():
     vertices = [int(x) for x in vertices_tmp]
     edges_tmp = input("Finally, enter ordered pairs of edges (e.g. '(vertexA,vertexB)' with no spaces), separated by space: ").split(" ")
     edges = []
+    # Breaks user ordered-pair input into integer tuple
     for e in edges_tmp:
         e = re.sub('[()]', '', e)
         e = re.sub('[,]', ' ', e)
