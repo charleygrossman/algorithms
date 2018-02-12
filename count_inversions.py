@@ -1,35 +1,40 @@
+full_cnt = 0
+
 def main():
     print("Enter [q] to quit")
-    while True:
-        print("Count the number of inversions in a given array")
-        i = input("Enter a list of numbers, separated by spaces: ").split(" ")
-        if i[0] == "q": break
-        A = [int(x) for x in i]
-        print(count_inversions(A))
+    print("Count the number of inversions in a given array")
+    with open('inversion_array.txt') as f:
+        A = []
+        for line in f:
+            A.append([int(x) for x in line.split()])
+        count_inversions(A)
+        global full_cnt
+        print(full_cnt)
+        full_cnt = 0
 
 def count_inversions(A):
     n = len(A)
-    if n < 2: return 0
+    if n < 2: return A
     # x and y are 2-tuples of type (list, integer)
-    x = sort_count(A[:n//2], 0)
-    y = sort_count(A[n//2:], 0)
-    z = count_splits(A, x[0], y[0])
-    return x[1] + y[1] + z
+    x = sort_count(A[:n//2])
+    y = sort_count(A[n//2:])
+    count_splits(A, x, y)
+
 
 # TODO: Fix sorting and count problem
-def sort_count(A, cnt):
+def sort_count(A):
     n = len(A)
-    if n < 2: return (A, cnt)
+    if n < 2: return(A)
     a = A[:n//2]
     b = A[n//2:]
-    sort_count(a, cnt)
-    sort_count(b, cnt)
-    cnt += merge(A, a, b)
+    sort_count(a)
+    sort_count(b)
+    merge(A, a, b)
     # TODO: Probably shouldn't return here
-    return (A, cnt)
+    return (A)
 
 def count_splits(A, a,b):
-    return merge(A, a, b)
+    merge(A, a, b)
 
 def merge(A, a, b):
     i = j = cnt = 0
@@ -42,8 +47,9 @@ def merge(A, a, b):
         else:
             A[i+j] = b[j]
             j+= 1
-            cnt += len(a) - i
-    return cnt
+            global full_cnt
+            full_cnt += len(a) - i
+    # return cnt
 
 if __name__ == "__main__":
     main()
