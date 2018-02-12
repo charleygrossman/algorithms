@@ -1,11 +1,11 @@
 class Graph(dict):
 
     # vertices is a list, edges a list of tuples
-    def __init__(self, vertices, edges, graph_type="directed"):
+    def __init__(self, vertices, edges, graph_type="1"):
         self.vertices = vertices
         self.edges = edges
         self.graph_type = graph_type
-        
+
         for v in vertices:
             self.add_vertex(v)
         for e in edges:
@@ -16,13 +16,13 @@ class Graph(dict):
 
     def add_edge(self, e, graph_type):
         v, w = e
-        if graph_type == "directed":
+        if graph_type == "1":
             self[v][w] = e
-        elif graph_type == "undirected":
+        elif graph_type == "2":
             self[v][w] = e
             self[w][v] = e
         else:
-            raise ValueError("Create a graph with type parameter 'directed' or 'undirected'")
+            raise ValueError("Create a graph with type parameter '1' or '2'")
 
     # Assumes legal vertices was entered
     def has_edge(self, e):
