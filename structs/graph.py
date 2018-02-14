@@ -46,7 +46,7 @@ class Graph(dict):
 
 class Vertex(object):
 
-    def __init__(self, val, color, time_disc, time_exhaust, dist):
+    def __init__(self, val=None, color=None, time_disc=None, time_exhaust=None, dist=None):
         self.val = val
         self.color = color
         self.time_disc = time_disc

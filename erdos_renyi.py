@@ -1,11 +1,12 @@
+# There is a probability p that there is an edge between any two nodes
+# For each p from 1 to 100 (discrete), generate a random graph of size 100
+# Then, run dfs and count the number of connected components
+# There should be a critical p when the graph breaks from a single component
+
 import random
+import structs.graph as graph
 
 def main():
-
-    # There is a probability p that there is an edge between any two nodes
-    # For each p from 1 to 100 (discrete), generate a random graph of size 100
-    # Then, run dfs and count the number of connected components
-    # There should be a critical p when the graph breaks from a single component
     for p in range(1,101):
         print(p)
         graph = Graph(100)

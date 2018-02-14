@@ -18,6 +18,7 @@ def main():
         edges.append((int(e[0]), int(e[2])))
     G = graph.Graph(vertices, edges, graph_type)
 
+
 # 1. Call DFS(G) to compute finishing times for each vertex
 # 2. Compute the reverse of G
 # 3. Call DFS(G_reverse), but in the main loop of DFS, consider the vertices
@@ -27,5 +28,6 @@ def main():
 def strongly_connected_components(self, G):
 
 
+def dfs()
 
 if __name__ == "__main__": main()
