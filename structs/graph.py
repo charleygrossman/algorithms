@@ -1,28 +1,36 @@
 class Graph(dict):
 
     # vertices is a list, edges a list of tuples
-    def __init__(self, vertices, edges, graph_type="1"):
+    def __init__(self, vertices, vertex_info=None, edges, graph_type):
         self.vertices = vertices
         self.edges = edges
         self.graph_type = graph_type
-
         for v in vertices:
-            self.add_vertex(v)
+            self[v] = {}
         for e in edges:
             self.add_edge(e, graph_type)
+        # Essentially, if a graph has already been constructed before,
+        # we need to hold onto all of the Vertex objects and their attributes.
+        # Otherwise, we construct new vertex objects
+        if vertex_info:
+            self.vertex_info = vertex_info
+        else:
+            for v in vertices:
+                self.vertex_info[v] = Vertex(v)
 
     def add_vertex(self, v):
         self[v] = {}
+        self.vertex_info[v] = Vertex(v)
 
     def add_edge(self, e, graph_type):
         v, w = e
-        if graph_type == "1":
+        if graph_type == "directed":
             self[v][w] = e
-        elif graph_type == "2":
+        elif graph_type == "undirected":
             self[v][w] = e
             self[w][v] = e
         else:
-            raise ValueError("Create a graph with type parameter '1' or '2'")
+            raise ValueError("Create a graph with type parameter 'directed' or 'undirected'")
 
     # Assumes legal vertices was entered
     def has_edge(self, e):
@@ -32,7 +40,7 @@ class Graph(dict):
 
     def reverse(self):
         edges_rev = [x[::-1] for x in self.edges]
-        return Graph(self.vertices, edges_rev, self.graph_type)
+        return Graph(self.vertices, self.vertex_info, edges_rev, self.graph_type)
 
     def __str__(self):
         retval = ""
@@ -43,7 +51,7 @@ class Graph(dict):
     def __repr__(self):
         return "<graph representation>"
 
-
+# Stored as key in Graph's vertex_info dictionary attribute
 class Vertex(object):
 
     def __init__(self, val=None, color=None, time_disc=None, time_exhaust=None, dist=None):

@@ -4,19 +4,18 @@ import structs.graph as graph
 def main():
     print("Enter [q] to quit")
     print("Determine if there is a route between two nodes in a directed graph")
-    # while True:
-    print("First, create a graph")
-    graph_type = input("Is this graph directed (enter 1), or undirected (enter 2)?: ")
-    vertices_tmp = input("Now, enter a list of vertices, separate by space: ").split(" ")
-    vertices = [int(x) for x in vertices_tmp]
-    edges_tmp = input("Finally, enter ordered pairs of edges (e.g. '(1,2)' with no spaces), separated by space: ").split(" ")
+    graph_type = input("Is this graph directed or undirected?: ")
+    vertices = [int(x) for x in input("Enter a list of vertices, separate by space: ").split(" ")]
+    tmp = input("Finally, enter ordered pairs of edges (e.g. '(1,2)' with no spaces), separated by space: ").split(" ")
     edges = []
-    # Breaks user ordered-pair input into integer tuple
-    for e in edges_tmp:
+    for e in tmp:
         e = re.sub('[()]', '', e)
         e = re.sub('[,]', ' ', e)
         edges.append((int(e[0]), int(e[2])))
     G = graph.Graph(vertices, edges, graph_type)
+    print(G)
+    G_rev = G.reverse()
+    print(G_rev)
 
 
 # 1. Call DFS(G) to compute finishing times for each vertex
@@ -25,9 +24,37 @@ def main():
 # in order of decreasing finishing times
 # 4. Output the vertices of each tree in the depth-first forest formed by 3.
 # as a separate strongly connected component
-def strongly_connected_components(self, G):
 
+def strongly_connected_components(G):
+    dfs(G)
 
-def dfs()
+clock = None
+def dfs(G, state="original"):
+    global clock
+    clock = 0
+    for v in G:
+        G.vertex_info[v].color = "white"
+    for each v in G:
+        # TODO: SCC count here (for reverse call)
+        if G.vertex_info[v].color == "white":
+            dfs_visit(G, v)
+
+def dfs_visit(G, v):
+    pre_visit(G, v)
+    for w in v.values():
+        if G.vertex_info[w].color == "white": dfs_visit(G, w)
+    post_visit(G, w)
+
+def pre_visit(G, v):
+    global clock
+    G.vertex_info[v].time_disc = clock
+    clock += 1
+    G.vertex_info[v].color == "gray"
+
+def post_visit(G, v):
+    global clock
+    G.vertex_info[v].time_exhaust == clock
+    clock += 1
+    G.vertex_info[v].color == "black"
 
 if __name__ == "__main__": main()
