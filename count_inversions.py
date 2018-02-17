@@ -3,7 +3,7 @@ full_cnt = 0
 def main():
     print("Enter [q] to quit")
     print("Count the number of inversions in a given array")
-    with open('inversion_array.txt') as f:
+    with open('count_inversions_test.txt') as f:
         A = []
         for line in f:
             A.append([int(x) for x in line.split()])

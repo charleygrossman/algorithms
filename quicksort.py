@@ -2,8 +2,7 @@ def main():
     print("Enter [q] to quit")
 
     while True:
-        i = input("Enter a list of numbers, separated by spaces: ")
-            .split()
+        i = input("Enter a list of numbers, separated by spaces: ").split(" ")
         if i[0] == "q": break
 
         arr = [int(x) for x in i]
