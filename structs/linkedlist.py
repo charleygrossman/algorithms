@@ -22,7 +22,7 @@ class LinkedList(object):
     def __init__(self, head=None):
         self.head = head
 
-    # Insert into front of list
+    # TODO: Inserts in reverse order
     def insert(self, data):
         newNode = Node(data)
         newNode.set_next(self.head)

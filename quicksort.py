@@ -1,20 +1,20 @@
+cnt = 0
+
 def main():
-    print("Enter [q] to quit")
+    with open('quicksort_test.txt') as f:
+        A = []
+        for line in f:
+            A.append([int(x) for x in line.split()])
+        quicksort(A, 0, len(A)-1)
+        print(A)
+        print(cnt)
 
-    while True:
-        i = input("Enter a list of numbers, separated by spaces: ").split(" ")
-        if i[0] == "q": break
-
-        arr = [int(x) for x in i]
-        quick_sort(arr, 0, len(arr)-1)
-        print(arr)
-
-def quick_sort(arr, lo, hi):
+def quicksort(arr, lo, hi):
     if lo >= hi: return
 
     p = partition(arr, lo, hi)
-    quick_sort(arr, lo, p-1)
-    quick_sort(arr, p+1, hi)
+    quicksort(arr, lo, p-1)
+    quicksort(arr, p+1, hi)
 
 # i := separates <p and >p
 # j := separates seen from unseen
@@ -24,6 +24,8 @@ def partition(arr, lo, hi):
     i = lo-1
 
     for j in range(lo, hi):
+        global cnt
+        cnt += 1
         if arr[j] <= pivot:
             i += 1
             tmp = arr[i]
@@ -33,6 +35,12 @@ def partition(arr, lo, hi):
     arr[i+1] = arr[hi]
     arr[hi] = tmp
     return i + 1
+
+# def choose_pivot(A, mode):
+#     if mode == "first": return A[0]
+#     elif mode == "last": return A[len(A) - 1]
+#     elif mode == "median": return sorted(A[0], A[len(A)//2], A[len(A)-1])[1]
+#     else: raise ValueError("Wrong mode")
 
 if __name__ == "__main__":
     main()
