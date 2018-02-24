@@ -7,19 +7,15 @@ def main():
 
 def is_permutation(a, b):
     if len(a) != len(b): return False
-    a_dict, b_dict = {}, {}
-    fill_dict(a_dict, a)
-    fill_dict(b_dict, b)
-    for k,v in a_dict.items():
-        if k not in b_dict: return False
-        else:
-            if b_dict[k] != v: return False
+    d = {}
+    for i in range(len(a)):
+        if a[i] in d: d[a[i]] += 1
+        else: d[a[i]] = 1
+        if b[i] in d: d[b[i]] -= 1
+        else: d[b[i]] = -1
+    for v in d.values():
+        if v != 0: return False
     return True
-
-def fill_dict(d, s):
-    for char in s:
-        if char in d: d[char] += 1
-        else: d[char] = 1
 
 
 if __name__ == "__main__": main()
