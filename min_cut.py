@@ -17,7 +17,7 @@ def main():
             row = [int(x) for x in tmp]
             G_prime[row[0]] = row[1:]
 
-    # Run roughly nlgn (where n is number of nodes) min-cuts, taking the best
+    # Run roughly nlogn (where n is number of nodes) min-cuts, taking the best
     for i in range(225):
         print("In test #{}".format(i))
         G = copy.deepcopy(G_prime)
