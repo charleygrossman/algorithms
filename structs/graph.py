@@ -1,12 +1,14 @@
+# Adjacency list representation using dictionary and tuple edges
 class Graph(dict):
 
-    # vertices is a list, edges a list of tuples
+    # vertices is a list of numbers, and edges a list of tuples
     def __init__(self, vertices, edges, graph_type, vertex_info=None):
         self.vertices = vertices
         self.edges = edges
-        self.graph_type = graph_type
+        self.graph_type = graph_type.lower()
         for v in vertices:
             self[v] = {}
+        # TODO: Only verify graph_type once
         for e in edges:
             self.add_edge(e, graph_type)
 
@@ -41,17 +43,18 @@ class Graph(dict):
         else: return False
 
     def reverse(self):
-        edges_rev = [x[::-1] for x in self.edges]
+        edges_rev = [e[::-1] for e in self.edges]
         return Graph(self.vertices, edges_rev, self.graph_type, self.vertex_info)
 
     def __str__(self):
-        retval = ""
+        retval = []
         for k, v in self.items():
-            retval += str(k) + " -> " + str(v) + "\n"
-        return retval
+            retval.append(str(k) + " -> " + str(v) + "\n")
+        return "".join(retval)
 
     def __repr__(self):
         return "<graph representation>"
+
 
 # Stored as key in Graph's vertex_info dictionary attribute
 class Vertex(object):
