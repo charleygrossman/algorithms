@@ -1,70 +1,68 @@
-# Adjacency list representation using dictionary and tuple edges
+# Adjacency list representation
+# Inherits from dictionary, has 2-tuple graph edge values
 class Graph(dict):
 
-    # vertices is a list of numbers, and edges a list of tuples
-    def __init__(self, vertices, edges, graph_type, vertex_info=None):
-        self.vertices = vertices
+    # nodes: list , edges: list of tuples
+    def __init__(self, nodes, edges, directed=True, node_info=None):
+        self.nodes = nodes
         self.edges = edges
-        self.graph_type = graph_type.lower()
-        for v in vertices:
+        self.directed = directed
+        for v in nodes:
             self[v] = {}
-        # TODO: Only verify graph_type once
         for e in edges:
-            self.add_edge(e, graph_type)
-
+            self.add_edge(e)
         # If a graph has already been constructed before,
-        # we need to hold onto all of the Vertex objects and their attributes.
-        # Otherwise, we construct new vertex objects
-        if vertex_info:
-            self.vertex_info = vertex_info
+        # hold onto all of the node objects and their attributes.
+        # Otherwise, construct new node objects
+        if node_info:
+            self.node_info = node_info
         else:
-            self.vertex_info = {}
-            for v in vertices:
-                self.vertex_info[v] = Vertex(v)
+            self.node_info = {}
+            for v in nodes:
+                self.node_info[v] = Node(v)
 
-    def add_vertex(self, v):
+    def add_node(self, v):
         self[v] = {}
-        self.vertex_info[v] = Vertex(v)
+        self.node_info[v] = Node(v)
 
-    def add_edge(self, e, graph_type):
+    def add_edge(self, e):
         v, w = e
-        if graph_type == "directed":
+        if self.directed:
             self[v][w] = e
-        elif graph_type == "undirected":
+        else:
             self[v][w] = e
             self[w][v] = e
-        else:
-            raise ValueError("Create a graph with type parameter 'directed' or 'undirected'")
 
-    # Assumes legal vertices was entered
     def has_edge(self, e):
         v, w = e
-        if self[v][w] == e: return True
-        else: return False
+        if v in self and w in self[v] and self[v][w] == e:
+            return True
+        return False
 
-    def reverse(self):
+    def reversed(self):
         edges_rev = [e[::-1] for e in self.edges]
-        return Graph(self.vertices, edges_rev, self.graph_type, self.vertex_info)
+        return Graph(self.nodes, edges_rev, self.directed, self.node_info)
 
     def __str__(self):
         retval = []
         for k, v in self.items():
-            retval.append(str(k) + " -> " + str(v) + "\n")
+            retval.append("{} => {}\n".format(str(k), str(v)))
         return "".join(retval)
 
     def __repr__(self):
         return "<graph representation>"
 
 
-# Stored as key in Graph's vertex_info dictionary attribute
-class Vertex(object):
+# Stored as key in Graph's node_info dictionary attribute
+class Node(object):
 
-    def __init__(self, val=None, color=None, time_disc=None, time_exhaust=None, dist=None):
-        self.val = val
-        self.color = color
-        self.time_disc = time_disc
-        self.time_exhaust = time_exhaust
+    def __init__(self, value, visited=False, pre=None, post=None, dist=None, scc=None):
+        self.value = value
+        self.visited = visited
+        self.pre = pre
+        self.post = post
         self.dist = dist
+        self.scc = scc
 
     def __eq__(self, other):
         return self.val == other.val
@@ -73,7 +71,7 @@ class Vertex(object):
         return(hash(str(self.val)))
 
     def __str__(self):
-        return "Vertex " + str(self.val) + "\n"
+        return str(val)
 
     def __repr__(self):
-        return "<graph vertex representation>"
+        return "<graph node representation>"
