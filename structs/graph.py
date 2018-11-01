@@ -7,8 +7,8 @@ class Graph(dict):
         self.nodes = nodes
         self.edges = edges
         self.directed = directed
-        for v in nodes:
-            self[v] = {}
+        for n in nodes:
+            self[n] = {}
         for e in edges:
             self.add_edge(e)
         # If a graph has already been constructed before,
@@ -18,12 +18,12 @@ class Graph(dict):
             self.node_info = node_info
         else:
             self.node_info = {}
-            for v in nodes:
-                self.node_info[v] = Node(v)
+            for n in nodes:
+                self.node_info[n] = Node(n)
 
-    def add_node(self, v):
-        self[v] = {}
-        self.node_info[v] = Node(v)
+    def add_node(self, n):
+        self[n] = {}
+        self.node_info[n] = Node(n)
 
     def add_edge(self, e):
         v, w = e
@@ -42,6 +42,7 @@ class Graph(dict):
     def reversed(self):
         edges_rev = [e[::-1] for e in self.edges]
         return Graph(self.nodes, edges_rev, self.directed, self.node_info)
+
 
     def __str__(self):
         retval = []
@@ -65,13 +66,13 @@ class Node(object):
         self.scc = scc
 
     def __eq__(self, other):
-        return self.val == other.val
+        return self.value == other.value
 
     def __hash__(self):
-        return(hash(str(self.val)))
+        return(hash(str(self.value)))
 
     def __str__(self):
-        return str(val)
+        return str(self.value)
 
     def __repr__(self):
         return "<graph node representation>"

@@ -17,7 +17,7 @@ def main():
 
 
 class my_queue(object):
-    
+
     def __init__(self):
         self.stk_old = []
         self.stk_new = []
