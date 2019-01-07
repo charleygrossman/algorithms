@@ -5,7 +5,6 @@
 # 1. a and b are from S
 # 2. One is from s and the other is from S' (it's been previously merged)
 # Both are from their own S'
-# TODO: Update depth according to these three cases?
 
 
 def main():
