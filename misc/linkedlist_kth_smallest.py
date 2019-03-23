@@ -1,4 +1,4 @@
-import structs.linkedlist as ll
+import struct.linkedlist as ll
 
 def main():
     print("Enter [q] to quit")

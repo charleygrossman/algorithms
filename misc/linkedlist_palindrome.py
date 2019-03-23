@@ -3,7 +3,7 @@
 # and pop that while comparing current node for the second first_half
 # 2.) If size is not known, use the slow/fast runner technique
 
-import structs.linkedlist as ll
+import struct.linkedlist as ll
 from collections import deque
 
 def main():

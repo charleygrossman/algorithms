@@ -1,7 +1,7 @@
 # NOTE: This is broken not because of the algorithm, but because of the faulty
 # linkedlist implementation
 
-import structs.linkedlist as ll
+import struct.linkedlist as ll
 
 
 def main():

@@ -1,5 +1,5 @@
 import re
-import structs.graph as graph
+import struct.graph as graph
 
 def main():
     print("Enter [q] to quit")

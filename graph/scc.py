@@ -1,4 +1,4 @@
-import structs.graph as gph
+import struct.graph as gph
 import traceback
 import sys
 

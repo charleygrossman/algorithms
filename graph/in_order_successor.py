@@ -1,6 +1,6 @@
 # NOTE: This in_order function is a fantastic way to sort a bst
 
-import structs.bst as bst
+import struct.bst as bst
 
 def main():
     print("Press [q] to quit")

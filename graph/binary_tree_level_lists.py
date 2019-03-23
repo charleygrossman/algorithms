@@ -1,5 +1,5 @@
-# import structs.linkedlist as llist
-# import structs.searchtree as bin_tree
+# import struct.linkedlist as llist
+# import struct.searchtree as bin_tree
 
 def main():
     print("Make a linkedlist for all nodes at every depth of a binary tree")

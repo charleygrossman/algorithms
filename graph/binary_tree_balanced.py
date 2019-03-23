@@ -1,4 +1,4 @@
-import structs.searchtree as bst
+import struct.searchtree as bst
 from collections import deque
 
 def main():
