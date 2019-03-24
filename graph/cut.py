@@ -1,29 +1,34 @@
-import re
-import random as rand
+# Compute the minimum cut of a given graph
+
+
 import sys
+import re
 import copy
-import os.path
+import random as rand
 
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 best_cut = sys.maxsize
 
 
+def _input():
+    filepath = sys.argv[1]
+
+    with open(filepath) as f:
+        data = {}
+
+        for line in f.readlines():
+            row = [int(x) for x in re.split(r"[\D']+", line.rstrip())]
+            data[row[0]] = row[1:]
+
+        return data
+
+
 def main():
-    print("Compute the minimum cut of a given graph")
     # Create a master graph from the list
-    G_prime = {}
-    with open(os.path.join(BASE_DIR, 'test/cut.txt')) as f:
-        for line in f:
-            line = line.rstrip()
-            tmp = re.split(r"[\D']+", line)
-            row = [int(x) for x in tmp]
-            G_prime[row[0]] = row[1:]
+    G_prime = _input()
 
     # Run roughly nlogn (where n is number of nodes) min-cuts, taking the best
     for i in range(225):
-        print("In test #{}".format(i))
         G = copy.deepcopy(G_prime)
         test_min_cut(G)
     global best_cut
@@ -78,4 +83,6 @@ def min_cut_size(G):
     return count
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()
+
