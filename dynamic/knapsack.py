@@ -8,7 +8,7 @@ def main():
     data, W, n = _input()
     solution = knapsack(data, W, n)
 
-    print(solution)
+    print('Solution: {}'.format(solution))
 
 
 def knapsack(data, W, n):

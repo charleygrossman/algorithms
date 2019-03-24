@@ -7,7 +7,7 @@ import copy
 import random as rand
 
 
-best_cut = sys.maxsize
+min_cut = sys.maxsize
 
 
 def _input():
@@ -15,30 +15,34 @@ def _input():
 
     with open(filepath) as f:
         data = {}
+        n = 0
 
         for line in f.readlines():
+            n += 1
             row = [int(x) for x in re.split(r"[\D']+", line.rstrip())]
             data[row[0]] = row[1:]
 
-        return data
+        return data, n
 
 
 def main():
-    # Create a master graph from the list
-    G_prime = _input()
+    G_prime, n = _input()
 
-    # Run roughly nlogn (where n is number of nodes) min-cuts, taking the best
-    for i in range(225):
+    # Compute nlogn min-cuts and output the lowest
+    for i in range(n):
         G = copy.deepcopy(G_prime)
-        test_min_cut(G)
-    global best_cut
-    print(best_cut)
+        candidate(G)
+
+    global min_cut
+    print(min_cut)
 
 
-def test_min_cut(G):
-    global best_cut
+def candidate(G):
+    global min_cut
+
     new_cut = compute_min_cut(G)
-    if new_cut < best_cut: best_cut = new_cut
+    if new_cut < min_cut:
+        min_cut = new_cut
 
 
 def compute_min_cut(G):
