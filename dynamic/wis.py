@@ -5,11 +5,17 @@
 # nodes with a maximal sum of their combined weights
 
 
+import os.path
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 def main():
     # [(node, weight)]
     data = []
     try:
-        with open('mwis.txt') as file:
+        with open(os.path.join(BASE_DIR, 'test/wis.txt')) as file:
             node = 1
             for line in file.readlines()[1:]:
                 weight = int(line.strip())

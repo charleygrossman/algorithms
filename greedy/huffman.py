@@ -5,13 +5,17 @@
 # 1. a and b are from S
 # 2. One is from s and the other is from S' (it's been previously merged)
 # Both are from their own S'
+import os.path
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
     # [(symbol, weight)]
     data = []
     try:
-        with open('huffman.txt') as file:
+        with open(os.path.join(BASE_DIR, 'test/huffman.txt')) as file:
             i = 1
             for line in file.readlines()[1:]:
                 weight = int(line.strip())

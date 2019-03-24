@@ -12,11 +12,14 @@
 
 import networkx as nx
 from itertools import combinations
+import os.path
 
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
     try:
-        with open('clustering_big.txt') as file:
+        with open(os.path.join(BASE_DIR, 'test/maxspacing.txt')) as file:
             node_count, bit_count = map(int, file.readline().strip().split())
             data = dict_from_data(file)
     except:

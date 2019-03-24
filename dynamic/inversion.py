@@ -1,9 +1,15 @@
+import os.path
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 full_cnt = 0
+
 
 def main():
     print("Enter [q] to quit")
     print("Count the number of inversions in a given array")
-    with open('count_inversions_test.txt') as f:
+    with open(os.path.join(BASE_DIR, 'test/inversion.txt')) as f:
         A = []
         for line in f:
             A.append([int(x) for x in line.split()])
@@ -11,6 +17,7 @@ def main():
         global full_cnt
         print(full_cnt)
         full_cnt = 0
+
 
 def count_inversions(A):
     n = len(A)
@@ -33,8 +40,10 @@ def sort_count(A):
     # TODO: Probably shouldn't return here
     return (A)
 
+
 def count_splits(A, a,b):
     merge(A, a, b)
+
 
 def merge(A, a, b):
     i = j = cnt = 0
@@ -50,6 +59,7 @@ def merge(A, a, b):
             global full_cnt
             full_cnt += len(a) - i
     # return cnt
+
 
 if __name__ == "__main__":
     main()

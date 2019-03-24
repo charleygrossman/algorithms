@@ -1,8 +1,12 @@
 # Find the optimal solution to the knapsack problem on a given set of values and weights
+import os.path
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
-    with open('knapsack.txt') as file:
+    with open(os.path.join(BASE_DIR, 'test/knapsack.txt')) as file:
         W, n = map(int, file.readline().strip().split())
         # [(value, weight)]
         data = []

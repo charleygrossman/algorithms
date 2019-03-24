@@ -1,9 +1,12 @@
 # Minimizing weighted sum of completion times for scheduled jobs
+import os.path
 
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
     wl = []
-    with open('jobs.txt') as file:
+    with open(os.path.join(BASE_DIR, 'test/schedule.txt')) as file:
         for line in file.readlines()[1:]:
             w, l = map(int, line.strip().split())
             wl.append((w, l))

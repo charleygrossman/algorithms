@@ -1,7 +1,10 @@
 import struct.graph as gph
 import traceback
 import sys
+import os.path
 
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # For node finishing times and scc membership
 global t, scc, scc_counts
@@ -9,7 +12,7 @@ t, scc = 0, 1
 scc_counts = {}
 
 def main():
-    with open('scc.txt') as file:
+    with open(os.path.join(BASE_DIR, 'test/scc.txt')) as file:
         try:
             nodes = set()
             edges = []

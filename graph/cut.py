@@ -2,15 +2,19 @@ import re
 import random as rand
 import sys
 import copy
+import os.path
 
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 best_cut = sys.maxsize
+
 
 def main():
     print("Compute the minimum cut of a given graph")
     # Create a master graph from the list
     G_prime = {}
-    with open('min_cut_test.txt') as f:
+    with open(os.path.join(BASE_DIR, 'test/cut.txt')) as f:
         for line in f:
             line = line.rstrip()
             tmp = re.split(r"[\D']+", line)
@@ -25,16 +29,19 @@ def main():
     global best_cut
     print(best_cut)
 
+
 def test_min_cut(G):
     global best_cut
     new_cut = compute_min_cut(G)
     if new_cut < best_cut: best_cut = new_cut
+
 
 def compute_min_cut(G):
     while len(G) > 2:
         e = choose_edge(G)
         contract(G, e)
     return min_cut_size(G)
+
 
 def choose_edge(G):
     while True:
@@ -43,6 +50,7 @@ def choose_edge(G):
         u_vals = G[u]
         v = u_vals[rand.randrange(len(u_vals))]
         if v in keys and u != v: return (u, v)
+
 
 def contract(G, e):
     v, w = e
@@ -57,6 +65,7 @@ def contract(G, e):
     if v != w: del G[w]
     # Remove self-loops
     if v in G[v]: G[v].remove(v)
+
 
 def min_cut_size(G):
     count = 0

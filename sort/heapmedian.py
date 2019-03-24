@@ -6,11 +6,14 @@
 import sys
 import os
 from heapq import heappush, heappop, heapify
+import os.path
 
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
     arr = []
-    with open('heap.txt') as file:
+    with open(os.path.join(BASE_DIR, 'test/heap.txt')) as file:
         for line in file.readlines():
             arr.append(int(line.strip()))
     medians = get_medians(arr)
