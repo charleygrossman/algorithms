@@ -1,4 +1,4 @@
-# Find the maximum and minimum lengths of huffman-encoded symbols in a language S
+# Find the maximum and minimum lengths of huffman-encoded symbols in a language S.
 # At each step, symbols a and b are merged to ab. There are three cases:
 # 1. a and b are from S
 # 2. One is from s and the other is from S' (it's been previously merged)
@@ -15,7 +15,7 @@ def main():
     depths_merged = merge(data, depths)
     vals = sorted(list(depths_merged.values()))
     
-    print('Maximum depth: {}, Minimum depth: {}'.format(vals[-1], vals[0]))
+    print('Maximum depth: {}\nMinimum depth: {}'.format(vals[-1], vals[0]))
 
 
 def merge(data, depths):

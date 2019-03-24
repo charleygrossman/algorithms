@@ -1,5 +1,5 @@
-# Minimize the weighted sum of completion times for scheduled tasks.
-# A comparison of a suboptimal greedy strategy versus an optimal one
+# Minimize the weighted sum of completion times for scheduled tasks
+# (a comparison of a suboptimal greedy strategy versus an optimal one)
 
 
 import sys
@@ -28,7 +28,7 @@ def order_by_difference(wl):
         if x[0] - x[1] == dist:
             same_dist.append(x)
         else:
-            same_dist.sort(key=lambda x: x[0], reverse=True)
+            same_dist.sort(key=lambda _: _[0], reverse=True)
 
             for y in same_dist:
                 schedule.append(y)

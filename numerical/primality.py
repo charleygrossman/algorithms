@@ -1,27 +1,29 @@
+# Use the Miller-Rabin primality test to determine if a number is prime or composite
+
+
+import sys
 from random import randint
 
+
 def main():
-    print("Enter [q] to quit")
+    datum = _input()
+    solution = miller_rabin(datum)
 
-    while True:
-        i = input("Enter a number >= 2 to test if it is a prime, followed by " +
-                  " a space and a number of 'witness' trials (Try on a " +
-                  " Carmichael number! e.g. 561): ").split()
-        if i[0] == "q": break
+    if solution:
+        print('Prime')
+    else:
+        print('Composite')
 
-        arr = [int(x) for x in i]
-        o = miller_rabin(arr[0], arr[1])
-        if o: print("Prime")
-        else: print("Composite")
 
-# The higher the s, the more accurate the test
-def miller_rabin(n, s):
-    for i in range(1, s):
-        a = randint(1, n - 1)
-        if witness(a, n): return False
+def miller_rabin(n):
+    for i in range(20):
+        a = randint(1, n-1)
+        if witness(a, n):
+            return False
+
     return True
 
-# a is a witness, n is the test number
+
 def witness(a, n):
     t = 0
     u = n - 1
@@ -30,14 +32,16 @@ def witness(a, n):
         t += 1
 
     x = modexp(a, u, n)
-    for i in range(t):
-        tmp = (x ** 2) % n
-        if tmp == 1 and x != 1 and x != n - 1: return True
-        x = tmp
-    if x != 1: return True
-    return False
 
-# For computing a^b (mod n)
+    for i in range(t):
+        tmp = x**2 % n
+        if tmp == 1 and x != 1 and x != n - 1:
+            return True
+        x = tmp
+
+    return True if x != 1 else False
+
+
 def modexp(a, b, n):
     c = 0
     d = 1
@@ -45,11 +49,18 @@ def modexp(a, b, n):
 
     for i in range(len(b)):
         c *= 2
-        d = (d*d) % n
+        d = d*d % n
         if b[i] == "1":
             c += 1
-            d = (d*a) % n
+            d = d*a % n
+
     return d
+
+
+def _input():
+    datum = int(sys.argv[1].strip())
+    return datum
+
 
 if __name__ == "__main__":
     main()

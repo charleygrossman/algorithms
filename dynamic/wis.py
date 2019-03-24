@@ -1,4 +1,4 @@
-# Compute the maximum-weight independent set of a path graph,
+# Compute the maximum-weight independent set of a path graph, which is
 # the set of non-adjacent nodes with a maximal sum of their combined weights
 
 
@@ -10,7 +10,7 @@ def main():
     max_wis_path = max_wis(data)
     max_wis_weight = sum([data[node-1][1] for node in max_wis_path])
 
-    print('Path: {} Weight: {}'.format(max_wis_path, max_wis_weight))
+    print('Path: {}\nWeight: {}'.format(max_wis_path, max_wis_weight))
 
 
 def max_wis(data):

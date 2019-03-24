@@ -1,7 +1,7 @@
-# Compute the largest value of k such that there is a k-clustering with spacing at least 3
+# Compute the largest value of k such that there is a k-clustering with spacing at least 3.
 # Each line of the file represents a corresponding node in a graph labeled by line number,
-# the data of each node being the bitstring of the line itself. The distance of
-# two nodes is then the hamming distance between their bitstrings.
+# the data of each node being the bitstring of the line itself.
+# The distance of two nodes is then the hamming distance between their bitstrings.
 # Starting with all nodes as separate clusters, what is the maximum number of
 # clusters k that can be had while ensuring the max spacing is 3? That is,
 # every cluster should have nodes with hamming distance between 0 and 2 of each other.

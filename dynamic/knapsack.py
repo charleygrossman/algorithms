@@ -17,6 +17,7 @@ def knapsack(data, W, n):
     for i in range(1, n):
         for x in range(W+1):
             value, weight = data[i]
+
             if weight > x:
                 A[i][x] = A[i-1][x]
             else:
