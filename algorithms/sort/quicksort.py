@@ -29,6 +29,8 @@ def _quicksort(data: List[int], l: int, h: int):
     implementation with a running time much worse than O(nlg(n)).
 
     :param data: The list of integers to sort.
+    :param l: The first index of the list.
+    :param h: The last index of the list.
     :return:
     """
     if l >= h:
