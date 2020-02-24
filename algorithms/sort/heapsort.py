@@ -21,7 +21,7 @@ def main():
 @timer_decorator
 def heapsort(data: List[int]):
     """
-    heapsort is an in-place, false heapsort implementation
+    heapsort is an in-place, recursive heapsort implementation
     with performance much worse than O(nlg(n)).
 
     :param data: The list of integers to sort.
