@@ -1,1 +1,1 @@
-Simple Python console applications to get the idea of various algorithms
+Some fundamental algorithms and data structures implemented in multiple programming languages.
