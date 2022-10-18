@@ -4,60 +4,54 @@ import heapq
 
 
 def main():
-    l = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 0]
-    expected = [0, 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
-    print("========")
+    data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 0]
+    want = [0, 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
     print("insertion sort:")
-    print ("pass" if insertion_sort(l) == expected else "fail")
-    print("========")
+    print ("pass" if insertion_sort(data) == want else "fail")
     print("selection sort:")
-    print ("pass" if selection_sort(l) == expected else "fail")
-    print("========")
+    print ("pass" if selection_sort(data) == want else "fail")
     print("heapsort:")
-    print ("pass" if heapsort(l) == expected else "fail")
-    print("========")
+    print ("pass" if heapsort(data) == want else "fail")
     print("mergesort:")
-    print ("pass" if mergesort(l) == expected else "fail")
-    print("========")
+    print ("pass" if mergesort(data) == want else "fail")
     print("count sort:")
-    print ("pass" if count_sort(l) == expected else "fail")
+    print ("pass" if count_sort(data, 10) == want else "fail")
 
 
-def insertion_sort(lst: List[int]) -> List[int]:
-    l = copy.copy(lst)
-    for i in range(1, len(l)):
+def insertion_sort(data: List[int]) -> List[int]:
+    d = copy.copy(data)
+    for i in range(1, len(d)):
         j = i
-        while j > 0 and l[j] < l[j-1]:
-            l[j], l[j-1] = l[j-1], l[j]
+        while j > 0 and d[j] < d[j-1]:
+            d[j], d[j-1] = d[j-1], d[j]
             j -= 1
-    return l
+    return d
 
-def selection_sort(lst: List[int]) -> List[int]:
-    l = copy.copy(lst)
-    for i in range(len(l)):
+def selection_sort(data: List[int]) -> List[int]:
+    d = copy.copy(data)
+    for i in range(len(d)):
         min_i = i
-        for j in range(i+1, len(l)):
-            if l[j] < l[min_i]:
+        for j in range(i+1, len(d)):
+            if d[j] < d[min_i]:
                 min_i = j
-        l[min_i], l[i] = l[i], l[min_i]
-    return l
+        d[min_i], d[i] = d[i], d[min_i]
+    return d
 
-def heapsort(lst: List[int]) -> List[int]:
-    l = copy.copy(lst)
+def heapsort(data: List[int]) -> List[int]:
+    l = copy.copy(data)
     result = []
     heapq.heapify(l)
     while l:
         result.append(heapq.heappop(l))
     return result
 
-def mergesort(lst: List[int]) -> List[int]:
-    l = copy.copy(lst)
-    n = len(l)
+def mergesort(data: List[int]) -> List[int]:
+    n = len(data)
     if n < 2:
-        return l
+        return data
     k = n // 2
-    a = mergesort(l[:k])
-    b = mergesort(l[k:])
+    a = mergesort(data[:k])
+    b = mergesort(data[k:])
     return _merge(a, b)
 
 def _merge(a, b: List[int]) -> List[int]:
@@ -82,16 +76,14 @@ def _merge(a, b: List[int]) -> List[int]:
         k += 1
     return aux
 
-def count_sort(lst: List[int]) -> List[int]:
-    l = copy.copy(lst)
-    radix = 10
+def count_sort(data: List[int], radix: int) -> List[int]:
     count = [0] * (radix + 1)
-    for v in l:
+    for v in data:
         count[v+1] += 1
     for i in range(len(count)-1):
         count[i+1] += count[i]
-    result = [None] * len(l)
-    for v in l:
+    result = [None] * len(data)
+    for v in data:
         result[count[v]] = v
         count[v] += 1
     return result

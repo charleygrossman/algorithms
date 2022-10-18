@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["_merge",""],["count_sort",""],["insertion_sort",""],["main",""],["mergesort",""],["selection_sort",""]]};
