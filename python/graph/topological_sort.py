@@ -32,7 +32,6 @@ def topological_sort_kahn(graph: Dict[int, List[int]]) -> Optional[List[int]]:
                 sources.append(u)
     return result if len(result) == len(graph) else None
 
-
 def topological_sort_dfs(graph: Dict[int, List[int]]) -> List[int]:
     visited, time = [], [0]
     seen = set()

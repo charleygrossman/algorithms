@@ -7,14 +7,18 @@ def main():
         left=TreeNode(data=3, left=TreeNode(data=1), right=TreeNode(data=6, left=TreeNode(data=4), right=TreeNode(data=7))),
         right=TreeNode(data=10, right=TreeNode(data=14, left=TreeNode(data=13))),
     )
-    print("is a BST" if is_bst(valid) else "is not a BST")
+    want = True
+    got = is_bst(valid)
+    assert want == got, f"valid BST: want={want} got={got}"
 
     invalid = TreeNode(
         data=8,
         left=TreeNode(data=3, left=TreeNode(data=1), right=TreeNode(data=6, left=TreeNode(data=4), right=TreeNode(data=7))),
         right=TreeNode(data=10, right=TreeNode(data=14, left=TreeNode(data=16))),
     )
-    print("is a BST" if is_bst(invalid) else "is not a BST")
+    want = False
+    got = is_bst(invalid)
+    assert want == got, f"invalid BST: want={want} got={got}"
 
 
 class TreeNode:

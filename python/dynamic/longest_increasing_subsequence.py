@@ -4,17 +4,13 @@ from bisect import bisect_right
 
 
 def main():
-    sequence = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
-    expected = [
-        [0, 2, 6, 9, 11, 15],
-        [0, 4, 6, 9, 11, 15],
-        [0, 2, 6, 9, 13, 15],
-        [0, 4, 6, 9, 13, 15]
-    ]
-    print(f"LIS length: {lis_optimal(sequence)}")
+    seq = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+    want = 6
+    got = lis(seq)
+    assert want == got, f"LIS length: want={want} got={got}"
 
 
-def lis_optimal(s: List[int]) -> int:
+def lis(s: List[int]) -> int:
     l = [maxsize for _ in range(len(s)+1)]
     l[0] *= -1
     for i in range(len(s)):

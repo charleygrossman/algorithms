@@ -1,6 +1,7 @@
 from typing import *
 import copy
 
+
 def main():
     head = ListNode(data=1, next=ListNode(data=2, next=ListNode(data=3, next=ListNode(data=4))))
     print(f"traversal: {traverse(head)}")
@@ -9,6 +10,7 @@ def main():
     print(f"second from last: {k_from_last(head, 2)}")
     print(f"third from last: {k_from_last(head, 3)}")
     print(f"first: {k_from_last(head, 4)}")
+
 
 class ListNode:
     def __init__(self, data: Optional[int]=None, next=None):
@@ -40,6 +42,7 @@ def k_from_last(head: ListNode, k: int) -> int:
         fast = fast.next
         slow = slow.next
     return slow.data
+
 
 if __name__ == "__main__":
     main()

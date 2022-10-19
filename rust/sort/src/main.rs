@@ -1,28 +1,18 @@
 fn main() {
     let data = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 0];
     let want = vec![0, 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9];
-    let got = insertion_sort(&data);
-    assert_eq!(want, got);
     let got = selection_sort(&data);
+    assert_eq!(want, got);
+    let got = insertion_sort(&data);
     assert_eq!(want, got);
     let got = mergesort(&data);
     assert_eq!(want, got);
+    let got = quicksort(&data);
+    assert_eq!(want, got);
     let data: Vec<u32> = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 0];
     let want: Vec<u32> = vec![0, 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9];
-    let got = count_sort(&data, 10);
+    let got = counting_sort(&data, 10);
     assert_eq!(want, got);
-}
-
-fn insertion_sort(data: &[i32]) -> Vec<i32> {
-    let mut d = Vec::from(data);
-    for i in 1..d.len() {
-        let mut j = i;
-        while j > 0 && d[j] < d[j-1] {
-            (d[j], d[j-1]) = (d[j-1], d[j]);
-            j -= 1;
-        }
-    }
-    return d;
 }
 
 fn selection_sort(data: &[i32]) -> Vec<i32> {
@@ -34,7 +24,19 @@ fn selection_sort(data: &[i32]) -> Vec<i32> {
                 min_i = j;
             }
         }
-        (d[min_i], d[i]) = (d[i], d[min_i])
+        d.swap(i, min_i);
+    }
+    return d;
+}
+
+fn insertion_sort(data: &[i32]) -> Vec<i32> {
+    let mut d = Vec::from(data);
+    for i in 1..d.len() {
+        let mut j = i;
+        while j > 0 && d[j] < d[j-1] {
+            d.swap(j, j-1);
+            j -= 1;
+        }
     }
     return d;
 }
@@ -77,7 +79,36 @@ fn _merge(a: &[i32], b: &[i32]) -> Vec<i32> {
     return aux;
 }
 
-fn count_sort(data: &[u32], radix: u32) -> Vec<u32> {
+fn quicksort(data: &[i32]) -> Vec<i32> {
+    let mut d = Vec::from(data);
+    _quicksort(&mut d, 0, (data.len()-1) as i32);
+    return d;
+}
+
+fn _quicksort(d: &mut [i32], l: i32, h: i32) {
+    if l >= h || l < 0 {
+        return;
+    }
+    let p = _partition(d, l, h);
+    _quicksort(d, l, p-1);
+    _quicksort(d, p+1, h);
+}
+
+fn _partition(d: &mut [i32], l: i32, h: i32) -> i32 {
+    let pivot = d[h as usize];
+    let mut i = l-1;
+    for j in l..h {
+        if d[j as usize] <= pivot {
+            i += 1;
+            d.swap(i as usize, j as usize);
+        }
+    }
+    i += 1;
+    d.swap(i as usize, h as usize);
+    return i
+}
+
+fn counting_sort(data: &[u32], radix: u32) -> Vec<u32> {
     let mut count = vec![0; (radix+1) as usize];
     for v in data {
         count[(v+1) as usize] += 1;
